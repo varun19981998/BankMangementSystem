@@ -9,7 +9,6 @@ import java.util.*;
 import javax.swing.*; 
 import java.awt.event.*;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.plaf.metal.MetalBorders;
 public class SignupOne extends JFrame implements ActionListener{
     
     // global declareekrege
@@ -18,6 +17,7 @@ public class SignupOne extends JFrame implements ActionListener{
      ,statetextfield,pintextfield;
     JRadioButton male,female,other,married,unmarried;
     JDateChooser datechooser;
+    
     // constructor
     SignupOne(){
         //stlayout null hoga tbhi bordeer bounds tbhi kaam krta hai
@@ -231,15 +231,11 @@ public class SignupOne extends JFrame implements ActionListener{
        if(pin.equals("")){
            JOptionPane.showMessageDialog(null, "Pincode is required");
        } 
-       if(marital.equals("")){
-           JOptionPane.showMessageDialog(null, "Marital is required");
-       } 
+      
        if(email.equals("")){
            JOptionPane.showMessageDialog(null, "Email is required");
        } 
-       if(gender.equals("")){
-           JOptionPane.showMessageDialog(null, "Gender is required");
-       } 
+      
        
        else{
            // mysql query likhi hai
@@ -248,6 +244,8 @@ public class SignupOne extends JFrame implements ActionListener{
            String query="Insert into signup value('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pin+"','"+state+"')";
          // now mysql execute krege Conn class se(statement ki help se dml command execute update
            c.s.executeUpdate(query);
+           setVisible(false);
+           new SignupTwo(formno).setVisible(true);
        }
        
        
