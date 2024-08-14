@@ -8,13 +8,16 @@ import javax.swing.*;
 //import javax.swing.JLabel;
 import java.awt.*;
 
-
-public class SignupThree extends JFrame{
+import java.awt.event.*;
+import java.util.*;
+public class SignupThree extends JFrame implements  ActionListener{
     JRadioButton r1,r2,r3,r4;
     JCheckBox c1,c2,c3,c4,c5,c6,c7;
     JButton submit,cancel;
-    SignupThree(){
+    String formno;
+    SignupThree( String formno){
         setLayout(null);
+        this.formno=formno;
         //top label
         JLabel l1=new JLabel("Page 3 :Account Details");
         l1.setFont(new Font("Oshward",Font.BOLD,22));
@@ -122,8 +125,22 @@ public class SignupThree extends JFrame{
        c7.setBounds(100, 680, 600, 30);
        add(c7);
    
-        submit =new JButton("")
-                
+        submit =new JButton("Submit");
+        submit.setBackground(Color.BLACK);
+        submit.setForeground(Color.WHITE);
+          submit.setFont(new Font ("Oshward",Font.BOLD,14));
+          submit.setBounds(250,720,100,30);
+          submit.addActionListener(this);
+       add(submit);
+       
+               cancel =new JButton("Cancel");
+        cancel.setBackground(Color.BLACK);
+        cancel.setForeground(Color.WHITE);
+          cancel.setFont(new Font ("Oshward",Font.BOLD,14));
+          cancel.setBounds(420,720,100,30);
+              cancel.addActionListener(this);
+       add(cancel);
+       getContentPane().setBackground(Color.WHITE);
         add(r4);
         setSize(850,820);
         setLocation(350,0);
@@ -131,10 +148,74 @@ public class SignupThree extends JFrame{
     }
     
     
-    
+    public void actionPerformed(ActionEvent e){
+       if(e.getSource()==submit){
+          String accountType=null;
+          if(r1.isSelected()){
+              accountType="Saving Account";
+          }
+          else if(r2.isSelected()){
+              accountType="Fixed Deposit Account";
+              
+          }
+           else if(r3.isSelected()){
+              accountType="Current Account";
+              
+          }
+           else if(r4.isSelected()){
+              accountType="Reccuring Deposit Account";
+              
+          }
+          
+          //genrate pin and card number
+           Random random=new Random();
+           String cardnumber= ""+Math.abs((random.nextLong()%90000000L)+5040936000000000L);
+           String pinnumber=""+Math.abs((random.nextLong()%9000L)+1000L);
+           String facility="";
+           if(c1.isSelected()){
+               facility=facility +"ATM CARD";// multiple selected k liye ek sath concat 
+           }
+           else if(c2.isSelected()){
+               facility=facility +"Internet Banking";
+           }
+           else if(c3.isSelected()){
+               facility=facility +"Mobile Banking";
+           }
+           else if(c4.isSelected()){
+               facility=facility +"Email & SMS Banking";
+           }
+           else if(c5.isSelected()){
+               facility=facility +"Cheque Book";
+           }
+           
+           else if(c6.isSelected()){
+               facility=facility +"E-Statement";
+           }
+           try{
+               if(accountType.equals("")){
+                   JOptionPane.showMessageDialog(null, "Account type is required");
+               }
+               else{
+                   Conn conn=new Conn();
+                   String Query1="insert into signupthree values('"+formno+"','"+accountType+"','"+cardnumber+"','"+pinnumber+"','"+facility+"' )";
+                    String Query2="insert into login values('"+formno+"','"+cardnumber+"','"+pinnumber+"' )";
+
+                   conn.s.executeUpdate(Query1);
+                    conn.s.executeUpdate(Query2);
+
+                 JOptionPane.showMessageDialog(null, "Card Number"+ cardnumber+"\n Pin:"+pinnumber);
+               }
+               
+           } catch(Exception ae){
+               System.out.println(ae);
+           }
+       } else if(e.getSource()==cancel){
+           
+       }
+    }
     
     public static void main(String[] args) {
-        new SignupThree();
+        new SignupThree("");
     }
  
 }

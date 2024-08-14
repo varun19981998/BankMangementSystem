@@ -275,6 +275,8 @@ public class SignupTwo extends JFrame implements ActionListener{
          // now mysql execute krege Conn class se(statement ki help se dml command execute update
            c.s.executeUpdate(query);
            //signUp3 Object
+           setVisible(false);
+            new SignupThree(formno).setVisible(true);
        }
        
        

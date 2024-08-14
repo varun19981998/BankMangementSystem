@@ -3,100 +3,120 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package bank.management.system;
-import javax.swing.*;
+
+  //Varun Pratap Singh
 import java.awt.*;
 import java.awt.event.*;
-public class Login  extends JFrame implements ActionListener{
-    
-    // globally defined button isko hum bhar bhi use kr skte iske liye globally defined
-    JButton login,clear,signup;
-    // global ddeclaration textfields
-    JTextField cardtestfields;
-    JPasswordField pintextfields;
-    
+import javax.swing.*;
+import java.sql.*;
+
+public class Login extends JFrame implements ActionListener{
+    JLabel l1,l2,l3;
+    JTextField tf1;
+    JPasswordField pf2;
+    JButton b1,b2,b3;
+  
     Login(){
-        // set title 
-        setLayout(null);// null krne pr yeh border layout nhi uthyiga custom layout uthyiga
         setTitle("AUTOMATED TELLER MACHINE");
-        ImageIcon i1=new ImageIcon(ClassLoader.getSystemResource("icons/logo.jpg"));
-         Image i2=i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-         ImageIcon i3= new ImageIcon(i2);
-        JLabel label=new JLabel(i3);
-        label.setBounds(70, 10, 100, 100);
-        add(label);
         
-        //text add
-         JLabel text = new JLabel("Welcome to ATM");
-        text.setBounds(200, 40, 400, 40);
-         text.setFont(new Font("Osward",Font.BOLD,38));
-         add(text);
-         // card no 
-         
-         JLabel cardno = new JLabel(" CARD-NO");
-        cardno.setBounds(120, 150, 150, 30);
-         cardno.setFont(new Font("Osward",Font.BOLD,28));
-         add(cardno);
-          cardtestfields=new JTextField();
-         cardtestfields.setBounds(300,150,230,30);
-         cardtestfields.setFont(new Font("Arial",Font.BOLD,14));
-         add(cardtestfields);
-         // pin no
-         
-         JLabel pinno = new JLabel("Pin number");
-        pinno.setBounds(120, 220, 250, 30);
-         pinno.setFont(new Font("Osward",Font.BOLD,28));
-         add(pinno);
-         
-           pintextfields=new JPasswordField();
-         pintextfields.setBounds(300,220,230,30);
-         
-         pintextfields.setFont(new Font("Arial",Font.BOLD,14));
-         add(pintextfields);
-         
-         // button add
-          login=new JButton("Sign IN");
-         login.setBounds(300, 300, 100, 30);
-         login.setBackground(Color.black);
-         login.setForeground(Color.white);
-          login.addActionListener(this);
-         add(login);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/logo.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l11 = new JLabel(i3);
+        l11.setBounds(70, 10, 100, 100);
+        add(l11);
         
-          clear=new JButton("Clear");
-         clear.setBounds(430, 300, 100, 30);
-         clear.setBackground(Color.black);
-         clear.setForeground(Color.white);
-          clear.addActionListener(this);
-         add(clear);
-          signup=new JButton("Signup");
-         signup.setBounds(300, 350, 230, 30);
-         signup.setBackground(Color.black);
-         signup.setForeground(Color.white);
-          signup.addActionListener(this);
-         add(signup);
-         
-         
-         //
-         getContentPane().setBackground(Color.white);
+        l1 = new JLabel("WELCOME TO ATM");
+        l1.setFont(new Font("Osward", Font.BOLD, 38));
+        l1.setBounds(200,40,450,40);
+        add(l1);
         
-       // function use for creating frame
-     setSize(800,480);
-     // set visible is used for visible a frame 
+        l2 = new JLabel("Card No:");
+        l2.setFont(new Font("Raleway", Font.BOLD, 28));
+        l2.setBounds(125,150,375,30);
+        add(l2);
+        
+        tf1 = new JTextField(15);
+        tf1.setBounds(300,150,230,30);
+        tf1.setFont(new Font("Arial", Font.BOLD, 14));
+        add(tf1);
+        
+        l3 = new JLabel("PIN:");
+        l3.setFont(new Font("Raleway", Font.BOLD, 28));
+        l3.setBounds(125,220,375,30);
+        add(l3);
+        
+        pf2 = new JPasswordField(15);
+        pf2.setFont(new Font("Arial", Font.BOLD, 14));
+        pf2.setBounds(300,220,230,30);
+        add(pf2);
+                
+        b1 = new JButton("SIGN IN");
+        b1.setBackground(Color.BLACK);
+        b1.setForeground(Color.WHITE);
+        
+        b2 = new JButton("CLEAR");
+        b2.setBackground(Color.BLACK);
+        b2.setForeground(Color.WHITE);
+        
+        b3 = new JButton("SIGN UP");
+        b3.setBackground(Color.BLACK);
+        b3.setForeground(Color.WHITE);
+        
+        setLayout(null);
+        
+        b1.setFont(new Font("Arial", Font.BOLD, 14));
+        b1.setBounds(300,300,100,30);
+        add(b1);
+        
+        b2.setFont(new Font("Arial", Font.BOLD, 14));
+        b2.setBounds(430,300,100,30);
+        add(b2);
+        
+        b3.setFont(new Font("Arial", Font.BOLD, 14));
+        b3.setBounds(300,350,230,30);
+        add(b3);
+        
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        
+        getContentPane().setBackground(Color.WHITE);
+        
+        setSize(800,480);
+        setLocation(550,200);
         setVisible(true);
-        // we could change location of this frame 
-        setLocation(350,200);
-    }public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == clear){
-            cardtestfields.setText("");
-            pintextfields.setText("");
-            
-        }else if(ae.getSource()==login){
-            
-        }else if(ae.getSource()==signup){
-            setVisible(false);
-            new SignupOne().setVisible(true);
-    }}
-    public static void main(String[] args) {
-        new Login();
+        
     }
+    public void actionPerformed(ActionEvent ae){
+        try{        
+            if(ae.getSource()==b1){
+                Conn c1 = new Conn();
+                String cardno  = tf1.getText();
+                String pin  = pf2.getText();
+                String q  = "select * from login where cardno = '"+cardno+"' and pin = '"+pin+"'";
+
+                ResultSet rs = c1.s.executeQuery(q);
+                if(rs.next()){
+                    setVisible(false);
+                    new Transactions(pin).setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN");
+                }
+            }else if(ae.getSource()==b2){
+                tf1.setText("");
+                pf2.setText("");
+            }else if(ae.getSource()==b3){
+                setVisible(false);
+                new SignupOne().setVisible(true);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args){
+        new Login().setVisible(true);
+    }
+
     
 }
