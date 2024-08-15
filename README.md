@@ -12,6 +12,7 @@ The ATM Simulator System is a Java-based application that simulates the function
 - **Balance Inquiry**: Check the current balance of your account.
 - **Withdrawals**: Withdraw money from your account.
 - **Transaction History**: View recent transactions.
+- **Fast Bank Withdrawal**: A quick process of withdrawing money from a bank account.
 
 ## Installation
 
