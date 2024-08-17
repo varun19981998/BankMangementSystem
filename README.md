@@ -105,7 +105,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any questions or issues, please contact varunpsingh9898@gmail.com
+For any questions or issues, Please Contact varunpsingh9898@gmail.com
 
 # Screenshots
 <img src="https://raw.githubusercontent.com/varun19981998/BankMangementSystem/master/Screenshot/Screenshot%202024-08-15%20001317.png">
